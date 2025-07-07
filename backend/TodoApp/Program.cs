@@ -20,12 +20,24 @@ namespace TodoApp
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Enable CORS for any origin (for cloud deployment)
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             var app = builder.Build();
 
             // Use the correct path for the frontend directory (solution root + /frontend)
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseCors(); // Enable CORS middleware
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI();
