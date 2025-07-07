@@ -1,4 +1,4 @@
-const API = 'http://localhost:8000/api/todos';
+const API = '/api/todos';
 
 const fetchTodos = async () => {
   const res = await fetch(API);
