@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+.env
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# VSCode
+.vscode/

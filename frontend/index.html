@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Todo App</h1>
+    <form id="add-todo-form">
+      <input type="text" id="todo-title" placeholder="Add new todo..." required>
+      <button type="submit">Add Todo</button>
+    </form>
+    <ul id="todo-list"></ul>
+    
+    <!-- Templates for cloning -->
+    <template id="todo-item-template">
+      <li class="todo-item">
+        <div class="todo-header">
+          <span class="todo-title"></span>
+          <button class="todo-delete" title="Delete todo">🗑️</button>
+        </div>
+        <form class="add-task-form">
+          <input type="text" class="task-input" placeholder="Add task...">
+          <label class="due-label" for="">Due Date:</label>
+          <input type="date" class="due-input" title="Due date (required)" required>
+          <button type="submit" class="add-task-btn">Add</button>
+        </form>
+        <ul class="todo-tasks"></ul>
+      </li>
+    </template>
+    <template id="task-item-template">
+      <li class="task-item">
+        <span class="task-title"></span>
+        <input type="date" class="task-due">
+        <button class="task-delete" title="Delete task">✖</button>
+      </li>
+    </template>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
