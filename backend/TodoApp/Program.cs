@@ -22,26 +22,9 @@ namespace TodoApp
 
             var app = builder.Build();
 
-            // Force the backend to listen on port 8000 (or $PORT if set) so it matches the frontend's API URL.
-            // var port = Environment.GetEnvironmentVariable("PORT") ?? "8000";
-            // app.Urls.Clear();
-            // app.Urls.Add($"http://localhost:{port}");
-
             // Use the correct path for the frontend directory (solution root + /frontend)
-            var frontendPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"));
-            if (Directory.Exists(frontendPath))
-            {
-                app.UseDefaultFiles(new DefaultFilesOptions
-                {
-                    FileProvider = new PhysicalFileProvider(frontendPath),
-                    DefaultFileNames = new List<string> { "index.html" }
-                });
-                app.UseStaticFiles(new StaticFileOptions
-                {
-                    FileProvider = new PhysicalFileProvider(frontendPath)
-                });
-            }
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
             app.UseSwagger();

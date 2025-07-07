@@ -1,30 +1,27 @@
-# Use the official .NET SDK image to build and publish the backend
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy backend source
+# Copy backend code (including wwwroot)
 COPY backend ./backend
 WORKDIR /app/backend/TodoApp
 
-# Restore and publish
+# Restore and publish to known folder
 RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish -r linux-arm64 --self-contained false
+RUN dotnet publish -c Release -o /publish
 
-# Use the official .NET runtime image for the final image
+# Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-# Copy published backend
-COPY --from=build /app/publish .
+# Copy published output (including static frontend in wwwroot)
+COPY --from=build /publish .
 
-# Copy frontend static files to the published output (served by .NET)
-COPY frontend ./wwwroot
-
-# Expose the port the app runs on
+# Expose app port
 EXPOSE 8000
 
-# Set ASP.NET Core to listen on all interfaces
+# Environment: listen on all interfaces
 ENV ASPNETCORE_URLS=http://0.0.0.0:8000
 
-# Start the application
+# Start the app
 ENTRYPOINT ["dotnet", "TodoApp.dll"]
