@@ -13,10 +13,10 @@ namespace TodoApp.Application.Services
       _repo = repo;
     }
 
-    public List<Todo> GetAll() => _repo.GetAll();
-    public Todo? GetById(int id) => _repo.GetById(id);
-    public Todo Add(string todoTitle, DateTime? dueDate = null) => _repo.Add(todoTitle, dueDate);
-    public bool Delete(int id) => _repo.Delete(id);
-    public bool SetDueDate(int id, DateTime? dueDate) => _repo.SetDueDate(id, dueDate);
+    public List<Todo> GetAll(long userId) => _repo.GetAll(userId);
+    public Todo? GetById(int id, long userId) => _repo.GetById(id, userId);
+    public Todo Add(string todoTitle, DateTime? dueDate, long userId) => _repo.Add(todoTitle, dueDate, userId);
+    public bool Delete(int id, long userId) => _repo.Delete(id, userId);
+    public bool SetDueDate(int id, DateTime? dueDate, long userId) => _repo.SetDueDate(id, dueDate, userId);
   }
 }

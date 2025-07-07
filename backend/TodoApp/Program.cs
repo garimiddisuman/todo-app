@@ -16,6 +16,8 @@ namespace TodoApp
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddSingleton<ITodosRepository, TodosRepository>();
             builder.Services.AddSingleton<TodosService>();
+            builder.Services.AddSingleton<IUsersRepository, UsersRepository>();
+            builder.Services.AddSingleton<UsersService>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -33,7 +35,6 @@ namespace TodoApp
 
             var app = builder.Build();
 
-            // Use the correct path for the frontend directory (solution root + /frontend)
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();

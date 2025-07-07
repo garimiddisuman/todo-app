@@ -13,13 +13,17 @@ namespace TodoApp.test.API.Controllers
   public class TodosControllerTests : IClassFixture<WebApplicationFactory<TodoApp.Program>>
   {
     private readonly HttpClient _client;
+    private readonly string _cookieHeader;
 
     public TodosControllerTests(WebApplicationFactory<TodoApp.Program> factory)
     {
-      _client = factory.CreateClient(new WebApplicationFactoryClientOptions
-      {
-        BaseAddress = new System.Uri("http://localhost:8000")
-      });
+      var loginClient = factory.CreateClient(new WebApplicationFactoryClientOptions { BaseAddress = new System.Uri("http://localhost:8000") });
+      var loginReq = new { Name = "TestUser", UserId = 123456789L };
+      var loginResp = loginClient.PostAsJsonAsync("/api/users/login", loginReq).Result;
+      loginResp.EnsureSuccessStatusCode();
+      _cookieHeader = string.Join("; ", loginResp.Headers.GetValues("Set-Cookie"));
+      _client = factory.CreateClient(new WebApplicationFactoryClientOptions { BaseAddress = new System.Uri("http://localhost:8000") });
+      _client.DefaultRequestHeaders.Add("Cookie", _cookieHeader);
     }
 
     [Fact]

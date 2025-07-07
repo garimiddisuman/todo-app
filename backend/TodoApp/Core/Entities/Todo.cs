@@ -11,13 +11,15 @@ namespace TodoApp.Core.Entities
     public string TodoTitle { get; set; }
     public List<TodoTask> AllTasks { get; set; } = new List<TodoTask>();
     public DateTime? DueDate { get; set; }
+    public long UserId { get; set; }
 
-    public Todo(int todoId, string todoTitle, DateTime? dueDate = null)
+    public Todo(int todoId, string todoTitle, DateTime? dueDate = null, long userId = 0)
     {
       TodoId = todoId;
       TodoTitle = todoTitle;
       NextTaskId = 1;
       DueDate = dueDate;
+      UserId = userId;
     }
 
     public void AddTask(string title, DateTime? dueDate = null)

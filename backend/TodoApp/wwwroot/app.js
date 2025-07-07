@@ -164,12 +164,42 @@ const handleAddTodo = async (e) => {
   loadTodos();
 };
 
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+};
+
+const loginUser = async (name) => {
+  const userId = Date.now();
+  const res = await fetch('/api/users/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ Name: name, UserId: userId })
+  });
+  if (!res.ok) throw new Error('Login failed');
+  // Cookie is set by backend
+  return res.json();
+};
+
+const showLoginPopup = () => {
+  const name = prompt('Enter your name to log in:');
+  if (name && name.trim()) {
+    loginUser(name.trim()).then(() => main()).catch(alert);
+  }
+};
+
+// Ensure loadTodos is defined before main
 const loadTodos = async () => {
   const todos = await fetchTodos();
   renderTodos(todos);
 };
 
 const main = () => {
+  if (!getCookie('userId')) {
+    showLoginPopup();
+    return;
+  }
   loadTodos();
   document.getElementById('add-todo-form').onsubmit = handleAddTodo;
 };

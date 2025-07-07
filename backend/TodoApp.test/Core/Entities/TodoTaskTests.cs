@@ -54,5 +54,13 @@ namespace TodoApp.test.Core.Entities
       var exception = Record.Exception(() => task.Toggle());
       Assert.Null(exception);
     }
+
+    [Fact]
+    public void Toggle_ShouldNotThrowForNullTitle()
+    {
+      var task = new TodoTask { Id = 6, Title = null, IsCompleted = false };
+      var exception = Record.Exception(() => task.Toggle());
+      Assert.Null(exception);
+    }
   }
 }
