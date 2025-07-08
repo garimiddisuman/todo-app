@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Hosting;
-using System.IO;
 using TodoApp.Application.Services;
 using TodoApp.Core.Interfaces;
 using TodoApp.Infrastructure.Repositories;

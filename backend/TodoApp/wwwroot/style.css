@@ -329,3 +329,70 @@ form button:hover {
   background: #e3eaf2;
   border-radius: 6px;
 }
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .container {
+    max-width: 98vw;
+    margin: 24px 1vw;
+    padding: 32px 10px 24px 10px;
+  }
+  h1 {
+    font-size: 2em;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 18px 2vw 18px 2vw;
+    border: none;
+  }
+  h1 {
+    font-size: 1.3em;
+    margin-bottom: 18px;
+  }
+  form, .add-task-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  form input[type="text"],
+  form input[type="date"],
+  form button,
+  .add-task-form input[type="text"],
+  .add-task-form .due-input,
+  .add-task-form .add-task-btn {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 1em;
+  }
+  .todo-item {
+    padding: 16px 6px 10px 6px;
+  }
+  .todo-title {
+    font-size: 1.1em;
+  }
+  .todo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .task-item {
+    grid-template-columns: 1fr 60px 40px;
+    font-size: 0.98em;
+  }
+  .task-due, .due-input {
+    width: 60px;
+    font-size: 0.9em;
+    padding: 4px 4px;
+  }
+  .add-task-form .add-task-btn, .add-task-btn {
+    padding: 8px 0;
+    font-size: 1em;
+  }
+}
